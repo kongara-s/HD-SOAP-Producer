@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>config/project.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="feedListener" class="com.hd.app.feed.monitor.FeedListener">
+		<property name="directories">
+			<list>
+				<value>${dir.material}</value>
+				<value>${dir.error}</value>
+			</list>
+		</property>
+		<property name="soapClient">
+			<ref bean="soapClient"/>
+		</property>
+	</bean>
+	<bean id="soapClient" class="com.hd.app.soap.client.SOAPClient">
+	</bean>
+</beans>

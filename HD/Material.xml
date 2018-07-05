@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:InsertOrUpdateResources xmlns:ns0="http://www.HardDollar.com/webservices">
+    <ns0:jobCode>HDLibrary</ns0:jobCode>
+    <ns0:resources>
+        <ns1:Resource xmlns:ns1="http://schemas.datacontract.org/2004/07/HardDollar.WebServices">
+            <ns1:SelfRef>
+                <ns1:Keys>
+                    <ns1:ObjectReferenceKey>
+                        <ns1:Name>Code</ns1:Name>
+                        <ns1:Value>381000</ns1:Value>
+                    </ns1:ObjectReferenceKey>
+                </ns1:Keys>
+            </ns1:SelfRef>
+            <ns1:Code>381000</ns1:Code>
+            <ns1:CurrencyRef>
+                <ns1:Keys>
+                    <ns1:ObjectReferenceKey>
+                        <ns1:Name>Name</ns1:Name>
+                        <ns1:Value>U.S. Dollar</ns1:Value>
+                    </ns1:ObjectReferenceKey>
+                </ns1:Keys>
+            </ns1:CurrencyRef>
+            <ns1:Description>PKPS Material 38Test</ns1:Description>
+            <ns1:ResourceType>InstalledMaterial</ns1:ResourceType>
+            <ns1:Scales>
+                <ns1:ScaleData>
+                    <ns1:Costs>
+                        <ns1:CostValues>
+                            <ns1:CostData>
+                                <ns1:Category>Installed Materials</ns1:Category>
+                                <ns1:Value>38</ns1:Value>
+                            </ns1:CostData>
+                        </ns1:CostValues>
+                    </ns1:Costs>
+                </ns1:ScaleData>
+            </ns1:Scales>
+            <ns1:UnitOfMeasureRef>
+                <ns1:Keys>
+                    <ns1:ObjectReferenceKey>
+                        <ns1:Name>UserDefined2</ns1:Name>
+                        <ns1:Value>EA</ns1:Value>
+                    </ns1:ObjectReferenceKey>
+                </ns1:Keys>
+            </ns1:UnitOfMeasureRef>
+            <ns1:UserTag2Ref>
+                <ns1:Keys>
+                    <ns1:ObjectReferenceKey>
+                        <ns1:Name>Code</ns1:Name>
+                        <ns1:Value>1000</ns1:Value>
+                    </ns1:ObjectReferenceKey>
+                </ns1:Keys>
+            </ns1:UserTag2Ref>
+        </ns1:Resource>
+    </ns0:resources>
+    <ns0:transactionMetadata>
+        <ns1:NameValuePair xmlns:ns1="http://schemas.datacontract.org/2004/07/HardDollar.WebServices">
+            <ns1:Name>LogHandle</ns1:Name>
+        </ns1:NameValuePair>
+    </ns0:transactionMetadata>
+</ns0:InsertOrUpdateResources>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="soapProducer" default="build" basedir=".">
+
+	 
+<property project.home =${basedir} />
+ 
+<property project.project =${project.home}/ADX />
+ 
+<property project.classes =${project.home}/classes />
+ 
+<property project.src =${project.home}/src />
+ 
+<property project.src.java =${project.src}/java />
+<property project.config =${project.home}/config />
+ 
+<property project.lib =${project.home}/lib />
+ 
+<property project.dist =${project.home}/dist />
+ 
+<property project.build =${project.home}/build />
+	<target name="system" description="Load and display system properties">
+		<!-- Show key property values -->
+
+		<echo message="Project Name: ${project.name}" />
+
+		<echo message="Java Version: ${ant.java.version}" />
+
+		<echo message="Ant Version: ${ant.version}" />
+
+		<echo message="Base Dir: ${basedir}" />
+
+		
+
+		<tstamp>
+
+			<format property="FTIME" pattern="yyyyMMddHHmmss" />
+
+		</tstamp>
+
+	</target>
+
+	​
+	<target name="build" depends="clean,init,build.dirs,lib,compile,dist"
+		description="Build a WebLogic Project">
+
+		<echo message="Build done!" />
+
+	</target>
+
+	​
+
+	<!--++++++++++++++++++++++++++ -->
+
+	<!-- initialization target -->
+
+	<!--++++++++++++++++++++++++++ -->
+
+	​
+
+	<target name="init">
+
+		<tstamp>
+
+			<format property="FTIME" pattern="yyyyMMddHHmmss" />
+
+		</tstamp>
+
+		<echo message="classpath = ${compile.javac.classpath}" />
+
+	</target>
+
+	​
+
+	<!--+++++++++++++++++ -->
+
+	<!-- build target(s) -->
+
+	<!--+++++++++++++++++ -->
+
+	<target name="build.dirs" depends="init"
+		description="Create the directories for the build">
+
+		<mkdir dir="${compile.javac.destdir}" />
+
+		<mkdir dir="${project.build}" />
+
+		<mkdir dir="${project.dist}" />
+
+	</target>
+
+	​
+
+	<!--+++++++++++++++++++ -->
+
+	<!-- compile target(s) -->
+
+	<!--+++++++++++++++++++ -->
+
+	​
+
+	<target name="compile" depends="init,lib" description="Compile all java source">
+
+
+
+		<javac fork="yes" srcdir="${compile.javac.srcdir}" destdir="${compile.javac.destdir}"
+			includes="${compile.javac.include}" excludes="${compile.javac.exclude}"
+			classpath="${compile.javac.classpath}" debug="${compile.javac.debug}"
+			optimize="${compile.javac.optimize}" deprecation="${compile.javac.deprecation}"
+			verbose="${compile.javac.verbose}">
+
+		</javac>
+
+	</target>
+
+	​
+
+	<!--+++++++++++++++ -->
+
+	<!-- lib target(s) -->
+
+	<!--+++++++++++++++ -->
+
+	<target name="lib" depends="init" description="Create all Project Libraries">
+
+	</target>
+
+	​
+	<!--+++++++++++++++++ -->
+
+	<!-- dist target -->
+
+	<!--+++++++++++++++++ -->
+
+	<target name="dist" depends="init,compile,lib"
+		description="Create a WebLogic Distribution (.tar) File">
+
+		<jar jarfile="${project.build}/${project.prefix}.jar">
+
+			<fileset dir="${project.classes}" excludes="test/**" />
+
+		</jar>
+
+		​
+
+		<copy todir="${project.build}/config" overwrite="true">
+
+			<fileset dir="${project.config}" />
+
+		</copy>
+
+		​
+
+		<copy todir="${project.build}/lib" overwrite="true">
+
+			<fileset dir="${project.lib}" />
+
+		</copy>
+
+		​
+
+		<copy tofile="${project.build}/config/project.properties"
+			file="${project.home}/config/project-${target.env}.properties"
+			overwrite="true" />
+
+		​
+
+		<copy file="${project.home}/adxprocess.sh" overwrite="true"
+			tofile="${project.build}/adxprocess.sh">
+
+		</copy>
+
+		​
+
+		<copy file="${project.home}/adx-sec-process.sh" overwrite="true"
+			tofile="${project.build}/adx-sec-process.sh">
+
+		</copy>
+
+		​
+
+		<tar tarfile="${project.dist}/${project.prefix}.tar" basedir="${project.build}">
+
+			<exclude name="*.tar" />
+
+		</tar>
+
+		<echo message="Tarfile Created!" />
+
+	</target>
+
+	<!--+++++++++++++++++ -->
+
+	<!-- clean target(s) -->
+
+	<!--+++++++++++++++++ -->
+
+	<target name="clean.classes" depends="init"
+		description="Delete classes created by compile target(s)">
+
+		<delete dir="${project.classes}" />
+
+	</target>
+
+	<target name="clean.build" depends="init"
+		description="Delete lib files created by lib target(s)">
+
+		<delete dir="${project.build}" />
+
+	</target>
+
+	<target name="clean.dist" depends="init"
+		description="Delete distribution files created by dist target(s)">
+
+		<delete dir="${project.dist}" />
+
+	</target>
+
+	<target name="clean" depends="init,clean.classes,clean.build,clean.dist"
+		description="Clean the WebLogic Project build environment">
+
+	</target>
+
+
+
+</project>
+ 
+
+
